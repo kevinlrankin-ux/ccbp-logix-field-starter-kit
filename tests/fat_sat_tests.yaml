@@ -1,0 +1,38 @@
+tests:
+  - name: Line_EStopDominance_AllOutputsOff
+    steps:
+      - set: { xEStopOK: false }
+      - expect:
+          S01: { xCmdRun: false }
+          S02: { xCmdRun: false }
+          S03: { xCmdRun: false }
+          S04: { xCmdRun: false }
+          S05: { xCmdRun: false }
+
+  - name: Line_DownstreamFirstStart_Order
+    steps:
+      - set: { xEStopOK: true, xLinePermExternal: true, xStartLine: true }
+      - expect:
+          start_order: [S05_DISCHARGE, S04_ZONE4, S03_ZONE3, S02_ZONE2, S01_INFEED]
+
+  - name: Jam_S03_StopsS03AndUpstreamOnly
+    steps:
+      - set: { xEStopOK: true, xLinePermExternal: true, xStartLine: true }
+      - set: { S03_xJamOK: false }
+      - expect:
+          S03: { xCmdRun: false }
+          S02: { xCmdRun: false }
+          S01: { xCmdRun: false }
+          S04: { xCmdRun: true }
+          S05: { xCmdRun: true }
+
+  - name: LinePermissiveLoss_StopsAll
+    steps:
+      - set: { xEStopOK: true, xLinePermExternal: true, xStartLine: true }
+      - set: { xLinePermExternal: false }
+      - expect:
+          S01: { xCmdRun: false }
+          S02: { xCmdRun: false }
+          S03: { xCmdRun: false }
+          S04: { xCmdRun: false }
+          S05: { xCmdRun: false }

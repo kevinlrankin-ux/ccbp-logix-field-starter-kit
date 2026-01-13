@@ -1,0 +1,70 @@
+meta:
+  platform: rockwell
+  family: logix
+  studio5000: "v35+"
+  language: ladder_or_st
+  safety: false
+  hmi: factorytalk
+  site: "TBD_SITE"
+  line_id: "CL01"
+
+hmi_policy:
+  name: NO_AOI_INTERNALS
+  rule: "HMI binds only to public status tags; no reads from AOI internal members or local tags."
+
+modes:
+  enum: [OFF, MANUAL, AUTO, MAINT]
+  mapping: { OFF: 0, MANUAL: 1, AUTO: 2, MAINT: 3 }
+  default: OFF
+
+line:
+  description: "5-zone conveyor line"
+  sections: [S01_INFEED, S02_ZONE2, S03_ZONE3, S04_ZONE4, S05_DISCHARGE]
+  sequencing:
+    start_order: [S05_DISCHARGE, S04_ZONE4, S03_ZONE3, S02_ZONE2, S01_INFEED]
+    stop_order:  [S01_INFEED, S02_ZONE2, S03_ZONE3, S04_ZONE4, S05_DISCHARGE]
+    start_delay_ms: 500
+    stop_delay_ms: 200
+
+tag_dictionary:
+  inputs:
+    xEStopOK: BOOL
+    xLinePermExternal: BOOL
+    S01: { xFbRunning: BOOL, xJamOK: BOOL, xPE_Entry: BOOL, xPE_Exit: BOOL }
+    S02: { xFbRunning: BOOL, xJamOK: BOOL, xPE_Entry: BOOL, xPE_Exit: BOOL }
+    S03: { xFbRunning: BOOL, xJamOK: BOOL, xPE_Entry: BOOL, xPE_Exit: BOOL }
+    S04: { xFbRunning: BOOL, xJamOK: BOOL, xPE_Entry: BOOL, xPE_Exit: BOOL }
+    S05: { xFbRunning: BOOL, xJamOK: BOOL, xPE_Entry: BOOL, xPE_Exit: BOOL }
+  outputs:
+    S01: { xCmdRun: BOOL }
+    S02: { xCmdRun: BOOL }
+    S03: { xCmdRun: BOOL }
+    S04: { xCmdRun: BOOL }
+    S05: { xCmdRun: BOOL }
+  operator_commands:
+    xStartLine: BOOL
+    xStopLine: BOOL
+    xResetLine: BOOL
+    xMaintReq: BOOL
+    HOA: { xHand: BOOL, xOff: BOOL, xAuto: BOOL }
+    Authority: { xLocalSel: BOOL, xRemoteSel: BOOL }
+
+equipment:
+  - id: CL01_MODE
+    type: mode_authority
+    aoi: AOI_ModeAuthority
+  - id: S01_INFEED
+    type: conveyor_section
+    aoi: AOI_ConveyorSection
+  - id: S02_ZONE2
+    type: conveyor_section
+    aoi: AOI_ConveyorSection
+  - id: S03_ZONE3
+    type: conveyor_section
+    aoi: AOI_ConveyorSection
+  - id: S04_ZONE4
+    type: conveyor_section
+    aoi: AOI_ConveyorSection
+  - id: S05_DISCHARGE
+    type: conveyor_section
+    aoi: AOI_ConveyorSection

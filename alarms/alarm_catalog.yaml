@@ -1,0 +1,96 @@
+alarms:
+  - code: 5001
+    area: line
+    name: LinePermissiveLost
+    priority: 2
+    ack_required: true
+    text: "Line permissive not satisfied."
+    recovery: "Restore permissive chain condition; verify guards/interlocks."
+
+  - code: 5002
+    area: line
+    name: StartBlockedDownstream
+    priority: 3
+    ack_required: false
+    text: "Start request blocked by downstream not ready."
+    recovery: "Check downstream sections for jam/fault; clear and retry."
+
+  - code: 5201
+    area: section
+    name: S01_JamDetected
+    priority: 1
+    ack_required: true
+    text: "S01 INFEED jam detected."
+    recovery: "Clear jam at S01; verify sensors; reset."
+
+  - code: 5202
+    area: section
+    name: S02_JamDetected
+    priority: 1
+    ack_required: true
+    text: "S02 ZONE2 jam detected."
+    recovery: "Clear jam at S02; verify sensors; reset."
+
+  - code: 5203
+    area: section
+    name: S03_JamDetected
+    priority: 1
+    ack_required: true
+    text: "S03 ZONE3 jam detected."
+    recovery: "Clear jam at S03; verify sensors; reset."
+
+  - code: 5204
+    area: section
+    name: S04_JamDetected
+    priority: 1
+    ack_required: true
+    text: "S04 ZONE4 jam detected."
+    recovery: "Clear jam at S04; verify sensors; reset."
+
+  - code: 5205
+    area: section
+    name: S05_JamDetected
+    priority: 1
+    ack_required: true
+    text: "S05 DISCHARGE jam detected."
+    recovery: "Clear jam at S05; verify sensors; reset."
+
+  - code: 5301
+    area: section
+    name: S01_RunFbMismatch
+    priority: 3
+    ack_required: false
+    text: "S01 commanded run but no running feedback."
+    recovery: "Check starter/VFD, feedback wiring, and motor."
+
+  - code: 5302
+    area: section
+    name: S02_RunFbMismatch
+    priority: 3
+    ack_required: false
+    text: "S02 commanded run but no running feedback."
+    recovery: "Check starter/VFD, feedback wiring, and motor."
+
+  - code: 5303
+    area: section
+    name: S03_RunFbMismatch
+    priority: 3
+    ack_required: false
+    text: "S03 commanded run but no running feedback."
+    recovery: "Check starter/VFD, feedback wiring, and motor."
+
+  - code: 5304
+    area: section
+    name: S04_RunFbMismatch
+    priority: 3
+    ack_required: false
+    text: "S04 commanded run but no running feedback."
+    recovery: "Check starter/VFD, feedback wiring, and motor."
+
+  - code: 5305
+    area: section
+    name: S05_RunFbMismatch
+    priority: 3
+    ack_required: false
+    text: "S05 commanded run but no running feedback."
+    recovery: "Check starter/VFD, feedback wiring, and motor."
