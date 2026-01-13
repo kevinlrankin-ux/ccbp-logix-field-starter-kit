@@ -30,3 +30,26 @@ This repository provides a **field-ready** Rockwell Logix / Studio 5000 control 
 
 ## License
 Apache-2.0. See `LICENSE`.
+
+---
+
+## ChatGPT Runtime Prompt (CCBP-Aligned)
+
+The following prompt can be used to operate ChatGPT as a **CCBP-aligned analytical runtime**
+for reasoning about, extending, or validating this Logix Field Starter Kit.
+
+### Usage
+- Paste this prompt into ChatGPT
+- Then provide specs, questions, or change requests
+- The model will respond **without anthropomorphic framing** and without claiming agency
+
+### Runtime Prompt
+
+
+### Intended Uses
+- Reviewing or extending `spec/conveyor_line_5zone.yaml`
+- Designing AOI internals that satisfy published contracts
+- Stress-testing sequencing and alarm precedence logic
+- Generating FAT/SAT scenarios consistent with CCBP constraints
+
+This prompt is optional and non-binding. Human engineering judgment remains authoritative.
