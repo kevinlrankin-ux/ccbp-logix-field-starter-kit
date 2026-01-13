@@ -2,7 +2,7 @@
 
 This repository is a **field-ready starter kit** for Rockwell Logix projects using a CCBP-governed specification approach.
 
-It includes:
+It includes: 
 - Governance contract (CCBP Logix Field Contract)
 - Field library spec (UDTs + AOI I/O signatures)
 - Tagging and I/O mapping templates
