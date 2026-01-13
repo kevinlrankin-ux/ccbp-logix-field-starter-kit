@@ -28,3 +28,6 @@ This starter kit is intended to be adopted as a documentation-first control stan
 ## Version
 - Contract: `CCBP_LOGIX_FIELD_CONTRACT_v0.1`
 - Library: `LOGIX_FIELD_LIBRARY_SPEC_v0.1`
+
+## License
+CC BY 4.0 — see LICENSE. When reusing, please attribute: “CCBP Logix Field Starter Kit” by Kevin L. Rankin (and contributors).
