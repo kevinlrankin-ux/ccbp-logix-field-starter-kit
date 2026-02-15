@@ -12,3 +12,13 @@ ledger/enterprise_outbox/
 # Stamps / labels are generated outputs
 changes/**/stamp*.yaml
 changes/**/label_*.json
+# --- Runtime / generated artifacts (do not commit) ---
+fix-settings.ps1
+ledger/hash_registry.jsonl
+ledger/hash_registry.csv
+ledger/anchors/
+ledger/enterprise_outbox/
+
+# Stamps / labels are generated outputs
+changes/**/stamp*.yaml
+changes/**/label_*.json
