@@ -1,19 +1,24 @@
 ﻿{
     "ledger":  {
-                   "jsonl_path":  "ledger/hash_registry.jsonl",
-                   "csv_mirror_path":  "ledger/hash_registry.csv",
-                   "csv_path":  "ledger/hash_registry.csv",
+                   "anchor_every_n_events":  25,
                    "enable_csv_mirror":  true,
-                   "enable_hash_chain":  false,
+                   "jsonl_path":  "ledger/hash_registry.jsonl",
                    "enable_anchor":  false,
-                   "anchor_every_n_events":  25
+                   "enable_hash_chain":  false,
+                   "csv_path":  "ledger/hash_registry.csv"
                },
     "enterprise":  {
-                       "csv_mirror":  true,
-                       "enforce_sim_chain_on_real_promote":  true,
-                       "sqlite_hook":  false,
-                       "anchor_hook":  false
+                       "sinks":  {
+                                     "siem":  {
+                                                  "enabled":  false
+                                              },
+                                     "rest":  {
+                                                  "enabled":  false
+                                              },
+                                     "sql":  {
+                                                 "enabled":  false
+                                             }
+                                 }
                    },
-    "governance_mode":  "LIGHT",
-    "mode":  "LIGHT"
+    "governance_mode":  "LIGHT"
 }
