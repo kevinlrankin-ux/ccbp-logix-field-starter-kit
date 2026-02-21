@@ -1,0 +1,43 @@
+﻿{
+    "schema":  "ccbp.contract_index.v1",
+    "repo":  {
+                 "name":  "ccbp-logix-field-starter-kit",
+                 "platform":  "logix",
+                 "profile":  "conveyor_line",
+                 "versioning":  "semver"
+             },
+    "ccbp":  {
+                 "constitution_pointer":  "governance/CCBP_KERNEL.md",
+                 "patch_protocol_pointer":  "governance/PATCH_PROTOCOL.md",
+                 "output_contracts_pointer":  "governance/OUTPUT_CONTRACTS/"
+             },
+    "policies":  {
+                     "tag_exposure":  "NO_AOI_INTERNALS",
+                     "hmi_access_rule":  "PUBLIC_STATUS_ONLY",
+                     "state_rule":  "DETERMINISTIC_SEQUENCING",
+                     "naming_rule":  "CANONICAL_NAMING_V1"
+                 },
+    "inputs":  {
+                   "spec":  "spec/conveyor_line_5zone.yaml",
+                   "alarms":  "alarms/alarm_catalog.yaml",
+                   "tests":  "tests/fat_sat_tests.yaml",
+                   "hmi_binding_contract":  "hmi/faceplates.md"
+               },
+    "required_outputs":  {
+                             "manifests":  [
+                                               "artifacts/BUILD_MANIFEST.json",
+                                               "artifacts/SAG_REPORT.md"
+                                           ],
+                             "plans":  [
+                                           "artifacts/TAG_PLAN.json",
+                                           "artifacts/HMI_EXPORT_PLAN.json",
+                                           "artifacts/ALARM_PLAN.json",
+                                           "artifacts/TEST_MATRIX.json"
+                                       ]
+                         },
+    "gates":  {
+                  "allow_code_generation":  false,
+                  "allow_plc_project_mutation":  false,
+                  "require_human_for_release_packaging":  true
+              }
+}

@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ccbp.contract_index.v1",
+  "type": "object",
+  "required": ["schema","repo","ccbp","policies","inputs","required_outputs","gates"],
+  "properties": {
+    "schema": { "type": "string" }
+  }
+}
