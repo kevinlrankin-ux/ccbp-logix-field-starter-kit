@@ -1,0 +1,56 @@
+﻿name: CCBP Validate
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate (CCBP)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = "Stop"
+
+          $repoRoot = (Get-Location).Path
+
+          # Locate validate entrypoint (supports both layouts)
+          $candidates = @(
+            Join-Path $repoRoot "tools\ccbp\Invoke-CCBP.ps1",
+            Join-Path $repoRoot "tools\Invoke-CCBP.ps1"
+          )
+          $invoke = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $invoke) { throw "Invoke-CCBP.ps1 not found under tools\ccbp\ or tools\." }
+
+          & $invoke validate
+
+          $manifestPath = Join-Path $repoRoot "artifacts\BUILD_MANIFEST.json"
+          if (-not (Test-Path $manifestPath)) { throw "Missing BUILD_MANIFEST.json at artifacts/BUILD_MANIFEST.json" }
+
+          $m = Get-Content $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+          Write-Host ("BUILD_MANIFEST status: " + $m.status)
+
+          if ($m.status -ne "PASS") {
+            Write-Host "---- BUILD_MANIFEST.json ----"
+            Get-Content $manifestPath -Raw -Encoding UTF8 | Write-Host
+            throw "CCBP Validate failed (status != PASS)."
+          }
+
+      - name: Upload BUILD_MANIFEST (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BUILD_MANIFEST
+          path: artifacts/BUILD_MANIFEST.json
